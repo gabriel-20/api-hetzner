@@ -1,0 +1,11 @@
+[04-Feb-2019 15:40:32 UTC] PHP Warning:  copy(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in Command line code on line 1
+[04-Feb-2019 15:40:32 UTC] PHP Warning:  copy(https://getcomposer.org/installer): failed to open stream: no suitable wrapper could be found in Command line code on line 1
+[04-Feb-2019 15:42:01 UTC] PHP Fatal error:  Call to undefined function Symfony\Polyfill\Mbstring\iconv() in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php on line 661
+[04-Feb-2019 15:45:15 UTC] PHP Fatal error:  Call to undefined function Symfony\Polyfill\Mbstring\iconv() in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php on line 661
+[04-Feb-2019 15:45:42 UTC] PHP Fatal error:  Call to undefined function Symfony\Polyfill\Mbstring\iconv() in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php on line 661
+[04-Feb-2019 15:46:31 UTC] PHP Fatal error:  Call to undefined function Symfony\Polyfill\Mbstring\iconv() in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php on line 661
+[04-Feb-2019 15:47:11 UTC] PHP Fatal error:  Call to undefined function Symfony\Polyfill\Mbstring\iconv() in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php on line 661
+[04-Feb-2019 15:52:33 UTC] PHP Fatal error:  Call to undefined function Symfony\Polyfill\Mbstring\iconv() in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php on line 661
+[04-Feb-2019 15:56:32 UTC] PHP Fatal error:  Call to undefined function Symfony\Polyfill\Mbstring\iconv() in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php on line 661
+[05-Feb-2019 07:35:50 UTC] PHP Fatal error:  Call to undefined function Symfony\Polyfill\Mbstring\iconv() in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php on line 661
+[05-Feb-2019 08:22:35 UTC] PHP Fatal error:  Call to undefined function Symfony\Polyfill\Mbstring\iconv() in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php on line 661
