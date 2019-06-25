@@ -216,14 +216,7 @@ class AppModelsController extends Controller
 
         }
 
-        //echo "<pre>", print_r($sales), "</pre>";
         return $sales;
-    }
-
-    function tetsweb(){
-
-        $now = Carbon::now()->format('Y-m');
-        echo $this->getDaysThisPeriod($now);
     }
 
     function getDaysThisPeriod(){
@@ -423,100 +416,6 @@ class AppModelsController extends Controller
     }
 
 
-    public function trainerGetModelInfo2(){
-
-        $model = "AishaDevereaux";
-        $trainer = "trainer1";
-
-        $artisticemail = 'no email';
-        $artisticpassword = 'no password';
-
-        $modelartistic = DB::connection('mysql2')->table('models')->where('Modelname', $model)->first();
-        if ($modelartistic){
-            if ($modelartistic->artistic_email) $artisticemail = $modelartistic->artistic_email;
-            if ($modelartistic->artistic_password) $artisticpassword = $modelartistic->artistic_password;
-
-        }
-
-
-
-        $model_res = DB::table('sync_models')->where('sync_Modelname',$model)->first();
-
-        if ($model_res) {
-
-            if ($model_res->data_language == null) $model_res->data_language = "null";
-            if ($model_res->data_streamQuality == null) $model_res->data_streamQuality = "null";
-            if ($model_res->data_willingnesses == null) $model_res->data_willingnesses = "null";
-            if ($model_res->data_sex == null) $model_res->data_sex = "null";
-            if ($model_res->data_age == null) $model_res->data_age = "null";
-            if ($model_res->data_category == null) $model_res->data_category = "null";
-            if ($model_res->data_bannedCountries == null) $model_res->data_bannedCountries = "null";
-            if ($model_res->data_modelRating == null) $model_res->data_modelRating = "null";
-            if ($model_res->data_chargeAmount == null) $model_res->data_chargeAmount = "null";
-            if ($model_res->data_profilePictureUrl == null) $model_res->data_profilePictureUrl = "null";
-            if ($model_res->first_login == null) $model_res->first_login = "null";
-
-            $model_res->artistic_email = $artisticemail;
-            $model_res->artistic_password = $artisticpassword;
-
-            $model_res->shift = $this->modelShift($model);
-
-
-            $total["totalamount"] = 0;
-            $total["hours"] = "00:00:00";
-            $total["totalhistory"] = 0;
-            $sales = null;
-
-            $modelnameres = DB::connection('mysql2')->table('models')->where('Modelname',$model)->first();
-
-            if (($modelnameres) && ($modelnameres->Modelname)) {
-
-                if ($modelnameres->id) {
-
-                    $now = Carbon::now()->format('Y-m');
-                    $today = Carbon::now()->format('d');
-                    $days = $this->getDaysThisPeriod();
-                    $sales = [];
-
-                    foreach($days as $day){
-                        if($day < $today) {
-                            $fday = $now . "-" . $day;
-                            $result = DB::connection('mysql2')->table('sales')->where('modelid',$modelnameres->id)->where('date',$fday)->first();
-                            dd($result);
-                            if ($result) {
-                                $sales[] = $result;
-                            }
-
-                        } else break;
-
-                    }
-
-                    dd($sales);
-
-
-                    $sales = $this->getSalesPeriod($modelnameres->id);
-
-                }
-
-            }
-
-
-            return response()->json([
-                'success' => true,
-                'sales' => $sales
-            ]);
-
-        } else {
-            return response()->json([
-                'success' => false,
-                'data' => "Model not found!!"
-            ]);
-        }
-
-
-
-    }
-
     public function getTrainersStudio(Request $request){
 
         $trainer = $request->input('trainer');
@@ -623,8 +522,6 @@ class AppModelsController extends Controller
         $resFLogin = DB::table('models_timestamp')->where('modelname', $model)->where('last_status', '!=', 'offline')->whereDate('date', $tday)->orderBy('status_start', 'asc')->first();
         if ($resFLogin) {
             $fLogin = $resFLogin->status_start;
-            //$resLLogin = DB::table('models_timestamp')->where('modelname', $model)->where('last_status', '=', 'offline')->where('status_start', '<=', $fLogin)->orderBy('status_start', 'desc')->first();
-            //$lLogin = $resLLogin->status_start;
             $lLogin = $this->get_last_shif_end($model);
         }
 
@@ -1239,13 +1136,10 @@ class AppModelsController extends Controller
         $hlogin = explode(':',$flogin);
         $d_arr = explode('-', $date);
         $start_date = $d_arr[0].'-'.$d_arr[1].'-01';
-        $end_date = $date;
         if ($d_arr[2] > 15) $start_date = $d_arr[0].'-'.$d_arr[1].'-16';
 
 
         $startd = $start_date.'T00%3A00%3A00%2B02%3A00';
-        //$endd = $end_date.'T23%3A59%3A59%2B02%3A00';
-        //$endd = $flogin.'T23%3A59%3A59%2B02%3A00';
         $endd = $date.'T'.$hlogin[0].'%3A'.$hlogin[1].'%3A'.$hlogin[2].'%2B02%3A00';
 
         $time = 0;
